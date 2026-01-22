@@ -1,0 +1,5 @@
+[2026-01-22 20:30:49] [[31merror[39m] : TypeError: Cannot read properties of undefined (reading 'email') | meta: {"service":"minest-api"}
+[2026-01-22 20:31:32] [[31merror[39m] : TypeError: Cannot read properties of undefined (reading 'email') | meta: {"service":"minest-api"}
+[2026-01-22 20:33:25] [[31merror[39m] : ValidationError: "phoneno" is required | meta: {"service":"minest-api"}
+[2026-01-22 20:33:52] [[31merror[39m] : ValidationError: "phoneno" must be a string | meta: {"service":"minest-api"}
+[2026-01-22 20:38:08] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
