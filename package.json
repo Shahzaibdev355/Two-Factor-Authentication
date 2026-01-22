@@ -21,6 +21,7 @@
     "express": "^5.2.1",
     "joi": "^18.0.2",
     "joi-extract-type": "^15.0.8",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.5",
     "nodemon": "^3.1.11",
     "winston": "^3.19.0"
@@ -29,6 +30,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.0.10",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"

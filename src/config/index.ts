@@ -17,6 +17,9 @@ interface Config {
     SMTP_SECURE: boolean;
     SMTP_USER: string | undefined;
     SMTP_PASS: string | undefined;
+    
+    JWT_SECRET: string;
+    JWT_REFRESH_SECRET: string;
 }
 
 
@@ -34,6 +37,9 @@ const config: Config = {
     SMTP_SECURE: process.env.SMTP_SECURE === 'true',
     SMTP_USER: process.env.SMTP_USER,
     SMTP_PASS: process.env.SMTP_PASS,
+
+    JWT_SECRET: process.env.JWT_SECRET || "your_fallback_secret_that_should_be_changed",
+    JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || "your_fallback_refresh_secret",
 }
 
 export default config;

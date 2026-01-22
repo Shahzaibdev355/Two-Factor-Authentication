@@ -1,6 +1,7 @@
-import { hashValue } from "@/helpers/encryption.helper";
+import { compareValues, hashValue } from "@/helpers/encryption.helper";
 import { ServiceSuccess } from "@/helpers/service.helper";
 import { IUserRepository, IUserRequestData, IUserService } from "@/interfaces/user.interface";
+import { AppError } from "@/utils/appError";
 import bcrypt from "bcryptjs";
 
 export default class UserService implements IUserService {
@@ -43,4 +44,29 @@ export default class UserService implements IUserService {
 
     };
 
+
+    login = async (payload: IUserRequestData['login']['body']) => {
+
+        // find already exist user
+        const user = await this.userRepository.findOne(
+            {
+            email: payload.email
+            },
+            '+password'
+        )
+        if(!user){
+            throw new AppError('Invalid credentials', 400);
+        }
+
+        const enteredPassword = payload.password;
+        const hashedPassword = user.password;
+
+        const isPasswordMatch = compareValues(enteredPassword, hashedPassword);
+        if (!isPasswordMatch) {
+            throw new AppError('Invalid credentials', 400);
+        }
+
+        
+
+    };
 }

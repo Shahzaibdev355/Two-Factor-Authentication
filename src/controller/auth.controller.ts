@@ -1,5 +1,5 @@
 import { IUserController, IUserRequestData, IUserService } from "@/interfaces/user.interface";
-import { registerSchema } from "@/validators/auth.validators";
+import { loginSchema, registerSchema } from "@/validators/auth.validators";
 import { RequestHandler } from "express";
 
 
@@ -22,6 +22,27 @@ export default class UserController implements IUserController {
 
             const response = await this.userService.register(value);
             res.status(201).json(response);
+
+           
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
+
+    login: RequestHandler = async (req, res, next) => {
+        try {
+            const body = req.body as IUserRequestData['login']['body'];
+
+            const { value, error } = loginSchema.validate(body);
+            if (error){
+                next(error)
+                return
+            }
+
+            const response = await this.userService.login(value);
+            res.status(200).json(response);
 
            
         } catch (error) {

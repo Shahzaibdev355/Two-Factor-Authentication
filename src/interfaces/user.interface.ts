@@ -12,20 +12,30 @@ import { TCreateUserInput } from '@/types/createUserInput.type';
 import * as Joi from '@hapi/joi';
 import 'joi-extract-type';
 
-import { registerSchema } from '@/validators/auth.validators';
+import { loginSchema, registerSchema } from '@/validators/auth.validators';
 
 export interface IUserRequestData{
     register: {
         body: Joi.extractType <typeof registerSchema>;
     }
+    login:{
+        body: Joi.extractType <typeof loginSchema>;
+    }
 }
 
 export interface IUserController{
     register: RequestHandler
+    login: RequestHandler
 }
 
 export interface IUserService{
     register: (payload: IUserRequestData['register']['body']) => Promise<TServiceSuccess<{userId: string}>>
+
+    login: (payload: IUserRequestData['login']['body']) => Promise<
+    TServiceSuccess<{
+        userId: string,
+        accesstoken: string
+    }>>
 }
 
 
