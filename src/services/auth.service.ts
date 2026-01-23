@@ -6,7 +6,7 @@ import { AppError } from "@/utils/appError";
 import { signJWT } from "@/utils/jwt";
 import bcrypt from "bcryptjs";
 import config from '../config/index';
-import { generateMinutesSeconds } from "@/helpers/date-time.helper";
+import { generateDaysSeconds, generateMinutesSeconds } from "@/helpers/date-time.helper";
 import { generateOTP, generateRecoveryCodes } from "@/helpers/2fa.helper";
 import { create } from "node:domain";
 import { createQRCodeDataURL } from "@/helpers/qr.helper";
@@ -73,12 +73,15 @@ export default class UserService implements IUserService {
             throw new AppError('Invalid credentials', 400);
         }
 
+
+        // token generation
         const tokenPayload : TJwtPayload ={
             userId: String(user.id),
             stage: 'password'
         }
 
         const accessToken = signJWT(tokenPayload, config.JWT_SECRET , generateMinutesSeconds(5));
+
         return ServiceSuccess('User logged in',{
             userId: String(user.id),
             accesstoken: accessToken
@@ -132,6 +135,53 @@ export default class UserService implements IUserService {
 
 
     };
+
+    verify2Fa = async (user: IUserRequestData['verify2FA']['user'], payload:IUserRequestData['verify2FA']['body']) => {
+        
+        const totp = generateOTP(user.email, user.twoFactorAuth.secret!);
+        const delta = totp.validate({
+            token: payload.totp,
+            window: 1
+        });
+
+        // if (delta !== 0) {
+        if (delta === null) {
+            throw new AppError('verification failed', 400);
+        }
+
+        const is2FAActivated = user.twoFactorAuth.activated;
+        if (!is2FAActivated){
+
+            const updatedUser = await this.userRepository.updateOne({
+                _id: user.id
+            },{
+                $set: {
+                'twoFactorAuth.activated': true,    
+                }
+            })
+    
+            if(updatedUser.modifiedCount === 0){
+                throw new AppError('verification failed', 400);
+            }
+
+
+
+        }
+
+
+        const tokenPayload : TJwtPayload ={
+            userId: String(user.id),
+            stage: '2fa'
+        }
+
+        const accessToken = signJWT(tokenPayload, config.JWT_SECRET , generateDaysSeconds(1));
+
+        return ServiceSuccess('User logged in',{
+            userId: String(user.id),
+            accessToken: accessToken
+        });
+
+    }
 
 
 }

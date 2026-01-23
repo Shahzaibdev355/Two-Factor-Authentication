@@ -2,5 +2,5 @@
 
 export type TJwtPayload = { 
     userId: string;
-    stage: 'password' | 'auth-code';
+    stage: 'password' | '2fa';
 };

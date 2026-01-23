@@ -23,11 +23,19 @@ const userController = new UserController(userService);
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 
-router.post("/activate-2fa", 
+router.post("/activate-2fa",
     authMiddleware({
-        stage: ['password'], 
-        repositories: {userRepository}
-    }), 
+        stage: ['password'],
+        repositories: { userRepository }
+    }),
     userController.activate2FA);
+
+
+router.post("/verify-2fa",
+    authMiddleware({
+        stage: ['password'],
+        repositories: { userRepository }
+    }),
+    userController.verify2Fa);
 
 export default router;

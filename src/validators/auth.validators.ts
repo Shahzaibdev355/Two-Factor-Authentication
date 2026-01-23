@@ -17,3 +17,7 @@ export const loginSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+
+export const verfiy2FaValidator = Joi.object({
+    totp: Joi.string().length(6).required()
+    });

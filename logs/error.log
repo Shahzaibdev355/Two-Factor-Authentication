@@ -22,3 +22,28 @@
 [2026-01-23 16:46:21] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
 [2026-01-23 16:46:29] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
 [2026-01-23 16:55:56] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-23 18:32:34] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:32:39] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:32:49] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:33:34] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:33:54] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:35:09] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:36:57] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:36:59] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:37:06] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:46:17] [[31merror[39m] : ValidationError: "token" is required | meta: {"service":"minest-api"}
+[2026-01-23 18:47:12] [[31merror[39m] : ValidationError: "token" is required | meta: {"service":"minest-api"}
+[2026-01-23 18:47:17] [[31merror[39m] : ValidationError: "token" is required | meta: {"service":"minest-api"}
+[2026-01-23 18:48:02] [[31merror[39m] : ValidationError: "token" is required | meta: {"service":"minest-api"}
+[2026-01-23 18:48:12] [[31merror[39m] : ValidationError: "token" is required | meta: {"service":"minest-api"}
+[2026-01-23 18:53:42] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:54:05] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 18:56:10] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-23 18:56:25] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-23 18:58:29] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-23 18:58:39] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-23 19:00:08] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-23 19:00:18] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-23 19:00:37] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-23 19:09:43] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 19:10:40] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}

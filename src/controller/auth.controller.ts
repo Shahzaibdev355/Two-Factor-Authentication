@@ -1,7 +1,7 @@
 import { getCookieOptions } from "@/helpers/cookie.helper";
 import { IUserController, IUserRequestData, IUserService } from "@/interfaces/user.interface";
 import { IAuthenticateRequest } from "@/types/auth.types";
-import { loginSchema, registerSchema } from "@/validators/auth.validators";
+import { loginSchema, registerSchema, verfiy2FaValidator } from "@/validators/auth.validators";
 import { RequestHandler } from "express";
 
 
@@ -64,6 +64,32 @@ export default class UserController implements IUserController {
             const response = await this.userService.activate2FA(user);
             res.status(200).json(response);
           
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
+    verify2Fa: RequestHandler = async (req, res, next) => {
+        try {
+
+            const { user } = req as IAuthenticateRequest;
+
+            const body = req.body as IUserRequestData['verify2FA']['body'];
+
+            const { value, error } = verfiy2FaValidator.validate(body);
+            if (error){
+                next(error)
+                return
+            }
+
+            const response = await this.userService.verify2Fa(user, value);
+
+            const cookieOptions = getCookieOptions({purpose: 'auth', type: 'day', value: 1}) 
+            res.cookie('accessToken', response.data.accessToken, cookieOptions);
+            res.status(200).json(response);
+
+           
         } catch (error) {
             next(error);
         }

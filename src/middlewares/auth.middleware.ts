@@ -9,7 +9,7 @@ import { RequestHandler } from "express"
 
 
 type TAuthMiddleWareParam = {
-    stage: ('password' | 'auth-code')[],
+    stage: ('password' | '2fa')[],
     repositories: {
         userRepository: IUserRepository
     }
@@ -32,7 +32,7 @@ export const authMiddleware = (params: TAuthMiddleWareParam): RequestHandler => 
         }
 
         if (isAuthenticated) {
-            const user = await params.repositories.userRepository.findOne({_id: jwtPayload.userId}, '+twoFactorAuth')
+            const user = await params.repositories.userRepository.findOne({_id: jwtPayload.userId}, '+twoFactorAuth.secret')
             if (user) {
                 req.user = user
                 res.setHeader('X-Auth-Stage', jwtPayload.stage)

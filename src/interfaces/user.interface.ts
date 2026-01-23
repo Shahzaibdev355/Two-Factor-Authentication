@@ -12,7 +12,7 @@ import { TCreateUserInput } from '@/types/createUserInput.type';
 import * as Joi from '@hapi/joi';
 import 'joi-extract-type';
 
-import { loginSchema, registerSchema } from '@/validators/auth.validators';
+import { loginSchema, registerSchema, verfiy2FaValidator } from '@/validators/auth.validators';
 
 export interface IUserRequestData{
     register: {
@@ -24,12 +24,18 @@ export interface IUserRequestData{
     activate2FA: {
         user: IUserSchema
     }
+
+    verify2FA: {
+        user: IUserSchema;
+        body: Joi.extractType <typeof verfiy2FaValidator>;
+    }
 }
 
 export interface IUserController{
     register: RequestHandler
     login: RequestHandler
     activate2FA: RequestHandler
+    verify2Fa: RequestHandler
 }
 
 export interface IUserService{
@@ -46,6 +52,13 @@ export interface IUserService{
     TServiceSuccess<{
         qrDataUrl: string,
         recoveryCodes: string[]
+    }>>
+
+    
+    verify2Fa : (user: IUserRequestData['verify2FA']['user'], payload:IUserRequestData['verify2FA']['body']) => Promise<
+    TServiceSuccess<{
+        userId: string,
+        accessToken: string
     }>>
 
 
