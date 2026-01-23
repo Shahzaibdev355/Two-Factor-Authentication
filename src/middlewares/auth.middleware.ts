@@ -1,0 +1,47 @@
+import config from "@/config"
+import { IUserRepository } from "@/interfaces/user.interface"
+import { IAuthenticateRequest } from "@/types/auth.types"
+import { TJwtPayload } from "@/types/jwt.type"
+import { AppError } from "@/utils/appError"
+import { verifyJWT } from "@/utils/jwt"
+import { RequestHandler } from "express"
+
+
+
+type TAuthMiddleWareParam = {
+    stage: ('password' | 'auth-code')[],
+    repositories: {
+        userRepository: IUserRepository
+    }
+}
+
+export const authMiddleware = (params: TAuthMiddleWareParam): RequestHandler => async (_req, res, next) => {
+    try {
+        const req = _req as IAuthenticateRequest
+        const { accessToken } = req.cookies
+
+        if (!accessToken) {
+            return next(new AppError('Unauthorized', 401))
+        }
+
+        const jwtPayload = verifyJWT(accessToken, config.JWT_SECRET) as TJwtPayload
+
+        let isAuthenticated = false
+        if (params.stage.includes(jwtPayload.stage)) {
+            isAuthenticated = true
+        }
+
+        if (isAuthenticated) {
+            const user = await params.repositories.userRepository.findOne({_id: jwtPayload.userId}, '+twoFactorAuth')
+            if (user) {
+                req.user = user
+                res.setHeader('X-Auth-Stage', jwtPayload.stage)
+                return next()
+            }
+        }
+
+        next(new AppError('Unauthorized', 401))
+    } catch (error) {
+        next(new AppError('Unauthorized', 401))
+    }
+}

@@ -8,6 +8,8 @@ import { connectDB } from "./config/db";
 import { errorMiddleware } from './middlewares/error.middleware';
 
 import routes from "./routes/index";
+import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 
 // import routes from "./routes/index";
 
@@ -31,6 +33,10 @@ app.use(
     })
 );
 
+
+// middlewares
+app.use(helmet());
+app.use(cookieParser());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 

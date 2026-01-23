@@ -8,3 +8,17 @@
 [2026-01-23 13:02:34] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
 [2026-01-23 13:02:45] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
 [2026-01-23 13:02:50] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-23 16:32:48] [[31merror[39m] : TypeError: Cannot destructure property 'accessToken' of 'req.cookies' as it is undefined. | meta: {"service":"minest-api"}
+[2026-01-23 16:36:16] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:37:20] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:37:58] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:40:13] [[31merror[39m] : SyntaxError: Bad Unicode escape in JSON at position 22 (line 2 column 20) | meta: {"service":"minest-api"}
+[2026-01-23 16:40:21] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
+[2026-01-23 16:40:56] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:40:57] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:44:09] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:45:04] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:45:08] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:46:21] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:46:29] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:55:56] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}

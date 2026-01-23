@@ -1,3 +1,4 @@
+
 import jwt from "jsonwebtoken";
 import config from "../config/index";
 import { IUserSchema } from "../models/user.model";
@@ -5,6 +6,13 @@ import { TJwtPayload } from "@/types/jwt.type";
 
 
 export const signJWT = (payload: TJwtPayload, secret:string, expiresIn: number) => jwt.sign(payload, secret, { expiresIn });
+
+export const verifyJWT = (token: string, secret: string) => jwt.verify(token, secret);
+
+
+
+
+
 
 // Generate JWT access token
 export const generateToken = (user: IUserSchema): string => {
@@ -21,9 +29,6 @@ export const generateRefreshToken = (user: IUserSchema): string => {
 };
 
 // Verify JWT token
-export const verifyToken = (token: string): any => {
-  return jwt.verify(token, config.JWT_SECRET);
-};
 
 // Verify refresh token
 export const verifyRefreshToken = (token: string): any => {

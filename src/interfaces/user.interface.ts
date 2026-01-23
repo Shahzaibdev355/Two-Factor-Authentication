@@ -21,11 +21,15 @@ export interface IUserRequestData{
     login:{
         body: Joi.extractType <typeof loginSchema>;
     }
+    activate2FA: {
+        user: IUserSchema
+    }
 }
 
 export interface IUserController{
     register: RequestHandler
     login: RequestHandler
+    activate2FA: RequestHandler
 }
 
 export interface IUserService{
@@ -36,6 +40,16 @@ export interface IUserService{
         userId: string,
         accesstoken: string
     }>>
+
+
+    activate2FA : (user: IUserRequestData['activate2FA']['user']) => Promise<
+    TServiceSuccess<{
+        qrDataUrl: string,
+        recoveryCodes: string[]
+    }>>
+
+
+   
 }
 
 

@@ -4,6 +4,7 @@ import config from "../config/index";
 import UserRepository from "../repositories/user.repository";
 import UserService from "@/services/auth.service";
 import UserController from "@/controller/auth.controller";
+import { authMiddleware } from "@/middlewares/auth.middleware";
 
 const router = express.Router();
 
@@ -22,6 +23,11 @@ const userController = new UserController(userService);
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 
-
+router.post("/activate-2fa", 
+    authMiddleware({
+        stage: ['password'], 
+        repositories: {userRepository}
+    }), 
+    userController.activate2FA);
 
 export default router;

@@ -7,6 +7,9 @@ import { signJWT } from "@/utils/jwt";
 import bcrypt from "bcryptjs";
 import config from '../config/index';
 import { generateMinutesSeconds } from "@/helpers/date-time.helper";
+import { generateOTP, generateRecoveryCodes } from "@/helpers/2fa.helper";
+import { create } from "node:domain";
+import { createQRCodeDataURL } from "@/helpers/qr.helper";
 
 export default class UserService implements IUserService {
     // Implementation of user service methods would go here
@@ -82,4 +85,53 @@ export default class UserService implements IUserService {
         });
 
     };
+
+
+    activate2FA = async (user: IUserRequestData['activate2FA']['user']) => {
+
+        const is2FAActivated = user.twoFactorAuth.activated;
+        if (is2FAActivated) {
+            throw new AppError('2FA is already activated', 400);
+        }
+
+        const totp = generateOTP(user.email)
+        const otpAuth = totp.toString();
+
+        const qrDataUrl = await createQRCodeDataURL(otpAuth);
+
+        const secret  = totp.secret.base32;
+        const recoveryCodes = await generateRecoveryCodes(10)
+
+
+        const updatedUser = await this.userRepository.updateOne({
+            _id: user.id
+        },{
+            $set: {
+            'twoFactorAuth.secret': secret,
+            'twoFactorAuth.recoveryCodes': recoveryCodes.hashed.map((code) => {
+                
+                return{
+                    code,
+                    used: false
+                };
+
+            })
+
+
+            }
+        })
+
+        if(updatedUser.modifiedCount === 0){
+            throw new AppError('Failed to activate 2FA', 500);
+        }
+
+        return ServiceSuccess('2FA activation initiated',{
+            qrDataUrl,
+            recoveryCodes: recoveryCodes.plainText
+        });
+
+
+    };
+
+
 }

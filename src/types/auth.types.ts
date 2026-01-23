@@ -1,5 +1,8 @@
 import mongoose, { Document, Schema } from "mongoose";
 
+import { IUserSchema } from "@/models/user.model";
+import { Request } from "express";
+
 export interface RegisterUserInput {
 
     email: string;
@@ -19,3 +22,12 @@ export interface LoginUserInput {
 }
 
 
+
+
+
+export interface IAuthenticateRequest extends Request {
+    cookies: {
+        accessToken: string
+    };
+    user: IUserSchema;
+}

@@ -13,8 +13,9 @@ type TCookieParam =
 export const getCookieOptions = (param: TCookieParam) =>{
 
     const cookieOptions: CookieOptions={
-        path: '/api/v1',
+        path: '/',
         httpOnly: true,
+        sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',
     }
 
     if (param.purpose ===  'auth') {
@@ -33,7 +34,6 @@ export const getCookieOptions = (param: TCookieParam) =>{
 
     if (config.NODE_ENV === 'production') {
         cookieOptions.secure = true;
-        cookieOptions.sameSite = 'none';
     }
 
     return cookieOptions; 

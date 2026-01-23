@@ -45,3 +45,53 @@
 [2026-01-23 13:02:34] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
 [2026-01-23 13:02:45] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
 [2026-01-23 13:02:50] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-23 16:32:01] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:32:01] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:32:04] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-01.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:32:48] [[31merror[39m] : TypeError: Cannot destructure property 'accessToken' of 'req.cookies' as it is undefined. | meta: {"service":"minest-api"}
+[2026-01-23 16:35:15] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:35:15] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:35:17] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:36:05] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:36:05] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:36:07] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:36:16] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:37:20] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:37:58] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:40:13] [[31merror[39m] : SyntaxError: Bad Unicode escape in JSON at position 22 (line 2 column 20) | meta: {"service":"minest-api"}
+[2026-01-23 16:40:21] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
+[2026-01-23 16:40:56] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:40:57] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:43:02] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:43:02] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:43:04] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:43:22] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:43:22] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:43:24] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:43:41] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:43:41] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:43:44] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:44:09] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:44:47] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:44:47] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:44:50] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-01.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:45:04] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:45:08] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:45:50] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:45:50] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:45:53] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:46:21] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:46:29] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 16:51:03] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:51:03] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:51:06] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:51:18] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:51:18] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:51:20] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:51:27] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:51:27] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:51:29] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:52:10] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-23 16:52:10] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-23 16:52:12] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-00.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-23 16:55:56] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
