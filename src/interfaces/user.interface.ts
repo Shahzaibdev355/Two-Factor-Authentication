@@ -29,6 +29,13 @@ export interface IUserRequestData{
         user: IUserSchema;
         body: Joi.extractType <typeof verfiy2FaValidator>;
     }
+
+    userInfo:{
+        user: IUserSchema;
+    }
+    logOut:{
+        user: IUserSchema;
+    }
 }
 
 export interface IUserController{
@@ -36,6 +43,8 @@ export interface IUserController{
     login: RequestHandler
     activate2FA: RequestHandler
     verify2Fa: RequestHandler
+    userInfo : RequestHandler
+    logOut: RequestHandler
 }
 
 export interface IUserService{
@@ -61,7 +70,24 @@ export interface IUserService{
         accessToken: string
     }>>
 
+    userInfo: (user: IUserRequestData['userInfo']['user']) => Promise<
+    TServiceSuccess<{
 
+        userId: string
+        firstName: string
+        lastName: string
+        email: string
+        phoneNo: number
+        twoFactorAuth: {
+            activated: boolean; 
+        }
+        createdAt?: Date
+    }>>
+
+    logOut: (user: IUserRequestData['logOut']['user']) => Promise<
+    TServiceSuccess<{
+        userId: string
+    }>>
    
 }
 

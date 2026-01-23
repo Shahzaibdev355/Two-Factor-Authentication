@@ -23,6 +23,8 @@ const userController = new UserController(userService);
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 
+
+// Protected routes
 router.post("/activate-2fa",
     authMiddleware({
         stage: ['password'],
@@ -37,5 +39,24 @@ router.post("/verify-2fa",
         repositories: { userRepository }
     }),
     userController.verify2Fa);
+
+
+router.get("/userInfo",
+    authMiddleware({
+        stage: ['password', '2fa'],
+        repositories: { userRepository }
+    }),
+    userController.userInfo
+);
+
+
+router.put("/logout",
+    authMiddleware({
+        stage: ['password', '2fa'],
+        repositories: { userRepository }
+    }),
+    userController.logOut
+);
+
 
 export default router;

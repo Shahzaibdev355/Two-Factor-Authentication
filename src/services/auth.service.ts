@@ -184,4 +184,32 @@ export default class UserService implements IUserService {
     }
 
 
+    userInfo = async (user: IUserRequestData['userInfo']['user']) => {
+
+        const sanitized = {
+            userId: String(user.id),
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            phoneNo: user.phoneNo,
+            twoFactorAuth: {
+                activated: user.twoFactorAuth.activated
+            },
+            createdAt: user.createdAt
+        }
+
+        return ServiceSuccess('User info retrieved', sanitized);
+    }
+
+
+
+    logOut = async (user: IUserRequestData['logOut']['user']) => {
+
+        return ServiceSuccess('User logged out',{
+            userId: String(user.id)
+        });
+    }
+
+
+
 }

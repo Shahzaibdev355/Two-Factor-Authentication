@@ -47,3 +47,10 @@
 [2026-01-23 19:00:37] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
 [2026-01-23 19:09:43] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
 [2026-01-23 19:10:40] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-23 20:00:30] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-23 20:21:23] [[31merror[39m] : Error: 2FA is already activated | meta: {"service":"minest-api"}
+[2026-01-23 20:22:36] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 20:22:46] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 20:22:53] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-23 20:23:03] [[31merror[39m] : Error: 2FA is already activated | meta: {"service":"minest-api"}
+[2026-01-23 20:34:38] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
