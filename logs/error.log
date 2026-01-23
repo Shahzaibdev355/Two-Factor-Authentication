@@ -3,3 +3,8 @@
 [2026-01-22 20:33:25] [[31merror[39m] : ValidationError: "phoneno" is required | meta: {"service":"minest-api"}
 [2026-01-22 20:33:52] [[31merror[39m] : ValidationError: "phoneno" must be a string | meta: {"service":"minest-api"}
 [2026-01-22 20:38:08] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-23 12:59:08] [[31merror[39m] : ValidationError: "password" length must be at least 8 characters long | meta: {"service":"minest-api"}
+[2026-01-23 13:00:09] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
+[2026-01-23 13:02:34] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
+[2026-01-23 13:02:45] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
+[2026-01-23 13:02:50] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
