@@ -54,3 +54,26 @@
 [2026-01-23 20:22:53] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
 [2026-01-23 20:23:03] [[31merror[39m] : Error: 2FA is already activated | meta: {"service":"minest-api"}
 [2026-01-23 20:34:38] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-24 15:28:38] [[31merror[39m] : MongoDB reconnected | meta: {"service":"minest-api"}
+[2026-01-24 15:28:38] [[31merror[39m] : MongoDB reconnected | meta: {"service":"minest-api"}
+[2026-01-24 15:28:59] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-24 15:28:59] [[31merror[39m] : MongoDB reconnected | meta: {"service":"minest-api"}
+[2026-01-24 15:48:27] [[31merror[39m] : Error: 2FA is already activated | meta: {"service":"minest-api"}
+[2026-01-24 15:48:39] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-24 15:49:20] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
+[2026-01-24 15:59:13] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-24 16:04:04] [[31merror[39m] : Error: User already exists with this email | meta: {"service":"minest-api"}
+[2026-01-24 16:10:10] [[31merror[39m] : Error: User already exists with this email | meta: {"service":"minest-api"}
+[2026-01-24 16:12:41] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-24 16:25:54] [[31merror[39m] : Error: Invalid credentials | meta: {"service":"minest-api"}
+[2026-01-24 16:26:23] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-24 16:28:18] [[31merror[39m] : Error: Unauthorized | meta: {"service":"minest-api"}
+[2026-01-24 16:28:28] [[31merror[39m] : Error: 2FA is already activated | meta: {"service":"minest-api"}
+[2026-01-24 16:52:41] [[31merror[39m] : ValidationError: "phoneNo" must be a number | meta: {"service":"minest-api"}
+[2026-01-24 18:14:04] [[31merror[39m] : MongoDB reconnected | meta: {"service":"minest-api"}
+[2026-01-24 18:14:16] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-24 18:14:16] [[31merror[39m] : MongoDB reconnected | meta: {"service":"minest-api"}
+[2026-01-24 18:14:34] [[31merror[39m] : Error: 2FA is already activated | meta: {"service":"minest-api"}
+[2026-01-24 18:14:59] [[31merror[39m] : Error: verification failed | meta: {"service":"minest-api"}
+[2026-01-24 18:50:10] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-01-24 18:56:37] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}

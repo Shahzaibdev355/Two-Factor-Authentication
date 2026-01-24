@@ -12,9 +12,16 @@ type TCookieParam =
 
 export const getCookieOptions = (param: TCookieParam) =>{
 
+    const isProd = config.NODE_ENV === "production";
+
     const cookieOptions: CookieOptions={
         path: '/',
         httpOnly: true,
+        secure: isProd,
+        sameSite: isProd ? "none" : "lax"
+        
+        // Remove domain for localhost development
+        // domain: "localhost"
     }
 
     if (param.purpose ===  'auth') {

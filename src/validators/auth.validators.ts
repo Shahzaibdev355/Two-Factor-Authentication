@@ -15,6 +15,7 @@ export const registerSchema = Joi.object({
 export const loginSchema = Joi.object({
   email: Joi.string().email().required().trim(),
   password: Joi.string().required(),
+  twoFactorAuthCode: Joi.string().length(6).optional()
 });
 
 

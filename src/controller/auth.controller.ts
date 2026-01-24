@@ -114,13 +114,15 @@ export default class UserController implements IUserController {
 
     logOut: RequestHandler = async (req, res, next) => {
         try {
-            const {user, cookies} = req as IAuthenticateRequest; 
+            const {user} = req as IAuthenticateRequest; 
             const response = await this.userService.logOut(user);
 
+            // Clear accessToken cookie with exact same options used when setting
             const cookieOptions = getCookieOptions({purpose: 'logout'});
-            for (const cookie of Object.keys(cookies)){
-                res.clearCookie(cookie, cookieOptions);
-            }
+            res.clearCookie("accessToken", cookieOptions);
+            
+            // Also try clearing without any options as fallback
+            res.clearCookie("accessToken");
 
             res.status(200).json({
                 success: true,

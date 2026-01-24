@@ -1,215 +1,210 @@
 import { compareValues, hashValue } from "@/helpers/encryption.helper";
 import { ServiceSuccess } from "@/helpers/service.helper";
-import { IUserRepository, IUserRequestData, IUserService } from "@/interfaces/user.interface";
+import {
+  IUserRepository,
+  IUserRequestData,
+  IUserService,
+} from "@/interfaces/user.interface";
 import { TJwtPayload } from "@/types/jwt.type";
 import { AppError } from "@/utils/appError";
 import { signJWT } from "@/utils/jwt";
-import bcrypt from "bcryptjs";
-import config from '../config/index';
-import { generateDaysSeconds, generateMinutesSeconds } from "@/helpers/date-time.helper";
+import config from "../config/index";
+import {
+  generateDaysSeconds,
+  generateMinutesSeconds,
+} from "@/helpers/date-time.helper";
 import { generateOTP, generateRecoveryCodes } from "@/helpers/2fa.helper";
-import { create } from "node:domain";
 import { createQRCodeDataURL } from "@/helpers/qr.helper";
 
 export default class UserService implements IUserService {
-    // Implementation of user service methods would go here
-    constructor(private userRepository: IUserRepository) {
-        //
+  // Implementation of user service methods would go here
+  constructor(private userRepository: IUserRepository) {
+    //
+  }
+
+  register = async (payload: IUserRequestData["register"]["body"]) => {
+    // find already exist user
+    const user = await this.userRepository.findOne({
+      email: payload.email,
+    });
+    if (user) {
+      throw new Error("User already exists with this email");
     }
 
-    register = async (payload: IUserRequestData['register']['body']) => {
-       
-        // find already exist user
-        const user = await this.userRepository.findOne({
-            email: payload.email
-        })
-        if(user){
-            throw new Error('User already exists with this email');
-        }
+    // hash password
+    const hashPassword = await hashValue(payload.password);
 
-        // hash password
-        const hashPassword = await hashValue(payload.password);
+    // create user
+    const newUser = await this.userRepository.create({
+      email: payload.email,
+      password: hashPassword,
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      phoneNo: payload.phoneNo,
+      twoFactorAuth: {
+        activated: false,
+        secret: null,
+        recoveryCodes: [],
+      },
+    });
 
-        // create user
-        const newUser = await this.userRepository.create({
-            email: payload.email,
-            password: hashPassword,
-            firstName: payload.firstName,
-            lastName: payload.lastName,
-            phoneNo: payload.phoneNo,
-            twoFactorAuth: {
-                activated: false,
-                secret: null,
-                recoveryCodes: []
-            }
-        });
+    return ServiceSuccess("User registered", {
+      userId: String(newUser.id),
+    });
+  };
 
+  login = async (payload: IUserRequestData["login"]["body"]) => {
+    // find already exist user
+    const user = await this.userRepository.findOne(
+      {
+        email: payload.email,
+      },
+      "+password"
+    );
+    if (!user) {
+      throw new AppError("Invalid credentials", 400);
+    }
 
-        return ServiceSuccess('User registered',{
-            userId: String(newUser.id)
-        });
+    const enteredPassword = payload.password;
+    const hashedPassword = user.password;
 
+    const isPasswordMatch = await compareValues(
+      enteredPassword,
+      hashedPassword
+    );
+    if (!isPasswordMatch) {
+      throw new AppError("Invalid credentials", 400);
+    }
+
+    // token generation
+    const tokenPayload: TJwtPayload = {
+      userId: String(user.id),
+      stage: "password",
     };
 
+    const accessToken = signJWT(
+      tokenPayload,
+      config.JWT_SECRET,
+      generateMinutesSeconds(5)
+    );
 
-    login = async (payload: IUserRequestData['login']['body']) => {
+    return ServiceSuccess("User logged in", {
+      userId: String(user.id),
+      accesstoken: accessToken,
+      twoFactorAuthActivated: user.twoFactorAuth.activated,
+    });
+  };
 
-        // find already exist user
-        const user = await this.userRepository.findOne(
-            {
-            email: payload.email
-            },
-            '+password'
-        )
-        if(!user){
-            throw new AppError('Invalid credentials', 400);
+  activate2FA = async (user: IUserRequestData["activate2FA"]["user"]) => {
+    const is2FAActivated = user.twoFactorAuth.activated;
+    if (is2FAActivated) {
+      throw new AppError("2FA is already activated", 400);
+    }
+
+    const totp = generateOTP(user.email);
+    const otpAuth = totp.toString();
+
+    const qrDataUrl = await createQRCodeDataURL(otpAuth);
+
+    const secret = totp.secret.base32;
+    const recoveryCodes = await generateRecoveryCodes(10);
+
+    const updatedUser = await this.userRepository.updateOne(
+      {
+        _id: user.id,
+      },
+      {
+        $set: {
+          "twoFactorAuth.secret": secret,
+          "twoFactorAuth.recoveryCodes": recoveryCodes.hashed.map((code) => {
+            return {
+              code,
+              used: false,
+            };
+          }),
+        },
+      }
+    );
+
+    if (updatedUser.modifiedCount === 0) {
+      throw new AppError("Failed to activate 2FA", 500);
+    }
+
+    return ServiceSuccess("2FA activation initiated", {
+      qrDataUrl,
+      recoveryCodes: recoveryCodes.plainText,
+    });
+  };
+
+  verify2Fa = async (
+    user: IUserRequestData["verify2FA"]["user"],
+    payload: IUserRequestData["verify2FA"]["body"]
+  ) => {
+    const totp = generateOTP(user.email, user.twoFactorAuth.secret!);
+    const delta = totp.validate({
+      token: payload.totp,
+      window: 1,
+    });
+
+    // if (delta !== 0) {
+    if (delta === null) {
+      throw new AppError("verification failed", 400);
+    }
+
+    const is2FAActivated = user.twoFactorAuth.activated;
+    if (!is2FAActivated) {
+      const updatedUser = await this.userRepository.updateOne(
+        {
+          _id: user.id,
+        },
+        {
+          $set: {
+            "twoFactorAuth.activated": true,
+          },
         }
+      );
 
-        const enteredPassword = payload.password;
-        const hashedPassword = user.password;
+      if (updatedUser.modifiedCount === 0) {
+        throw new AppError("verification failed", 400);
+      }
+    }
 
-        const isPasswordMatch = await compareValues(enteredPassword, hashedPassword);
-        if (!isPasswordMatch) {
-            throw new AppError('Invalid credentials', 400);
-        }
-
-
-        // token generation
-        const tokenPayload : TJwtPayload ={
-            userId: String(user.id),
-            stage: 'password'
-        }
-
-        const accessToken = signJWT(tokenPayload, config.JWT_SECRET , generateMinutesSeconds(5));
-
-        return ServiceSuccess('User logged in',{
-            userId: String(user.id),
-            accesstoken: accessToken
-        });
-
+    const tokenPayload: TJwtPayload = {
+      userId: String(user.id),
+      stage: "2fa",
     };
 
+    const accessToken = signJWT(
+      tokenPayload,
+      config.JWT_SECRET,
+      generateDaysSeconds(1)
+    );
 
-    activate2FA = async (user: IUserRequestData['activate2FA']['user']) => {
+    return ServiceSuccess("User logged in", {
+      userId: String(user.id),
+      accessToken: accessToken,
+    });
+  };
 
-        const is2FAActivated = user.twoFactorAuth.activated;
-        if (is2FAActivated) {
-            throw new AppError('2FA is already activated', 400);
-        }
-
-        const totp = generateOTP(user.email)
-        const otpAuth = totp.toString();
-
-        const qrDataUrl = await createQRCodeDataURL(otpAuth);
-
-        const secret  = totp.secret.base32;
-        const recoveryCodes = await generateRecoveryCodes(10)
-
-
-        const updatedUser = await this.userRepository.updateOne({
-            _id: user.id
-        },{
-            $set: {
-            'twoFactorAuth.secret': secret,
-            'twoFactorAuth.recoveryCodes': recoveryCodes.hashed.map((code) => {
-                
-                return{
-                    code,
-                    used: false
-                };
-
-            })
-
-
-            }
-        })
-
-        if(updatedUser.modifiedCount === 0){
-            throw new AppError('Failed to activate 2FA', 500);
-        }
-
-        return ServiceSuccess('2FA activation initiated',{
-            qrDataUrl,
-            recoveryCodes: recoveryCodes.plainText
-        });
-
-
+  userInfo = async (user: IUserRequestData["userInfo"]["user"]) => {
+    const sanitized = {
+      userId: String(user.id),
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phoneNo: user.phoneNo,
+      twoFactorAuth: {
+        activated: user.twoFactorAuth.activated,
+      },
+      createdAt: user.createdAt,
     };
 
-    verify2Fa = async (user: IUserRequestData['verify2FA']['user'], payload:IUserRequestData['verify2FA']['body']) => {
-        
-        const totp = generateOTP(user.email, user.twoFactorAuth.secret!);
-        const delta = totp.validate({
-            token: payload.totp,
-            window: 1
-        });
+    return ServiceSuccess("User info retrieved", sanitized);
+  };
 
-        // if (delta !== 0) {
-        if (delta === null) {
-            throw new AppError('verification failed', 400);
-        }
-
-        const is2FAActivated = user.twoFactorAuth.activated;
-        if (!is2FAActivated){
-
-            const updatedUser = await this.userRepository.updateOne({
-                _id: user.id
-            },{
-                $set: {
-                'twoFactorAuth.activated': true,    
-                }
-            })
-    
-            if(updatedUser.modifiedCount === 0){
-                throw new AppError('verification failed', 400);
-            }
-
-
-
-        }
-
-
-        const tokenPayload : TJwtPayload ={
-            userId: String(user.id),
-            stage: '2fa'
-        }
-
-        const accessToken = signJWT(tokenPayload, config.JWT_SECRET , generateDaysSeconds(1));
-
-        return ServiceSuccess('User logged in',{
-            userId: String(user.id),
-            accessToken: accessToken
-        });
-
-    }
-
-
-    userInfo = async (user: IUserRequestData['userInfo']['user']) => {
-
-        const sanitized = {
-            userId: String(user.id),
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            phoneNo: user.phoneNo,
-            twoFactorAuth: {
-                activated: user.twoFactorAuth.activated
-            },
-            createdAt: user.createdAt
-        }
-
-        return ServiceSuccess('User info retrieved', sanitized);
-    }
-
-
-
-    logOut = async (user: IUserRequestData['logOut']['user']) => {
-
-        return ServiceSuccess('User logged out',{
-            userId: String(user.id)
-        });
-    }
-
-
-
+  logOut = async (user: IUserRequestData["logOut"]["user"]) => {
+    return ServiceSuccess("User logged out", {
+      userId: String(user.id),
+    });
+  };
 }

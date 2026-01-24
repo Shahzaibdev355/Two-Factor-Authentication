@@ -53,7 +53,8 @@ export interface IUserService{
     login: (payload: IUserRequestData['login']['body']) => Promise<
     TServiceSuccess<{
         userId: string,
-        accesstoken: string
+        accesstoken: string,
+        twoFactorAuthActivated: boolean
     }>>
 
 

@@ -18,7 +18,7 @@ console.log("🚀 App starting...");
 
 const app: Express = express();
 const PORT = config.PORT || 8000;
-const allowedOrigins = ["http://localhost:3000", ""];
+const allowedOrigins = ["http://localhost:8080", ""];
 
 // database connection
 connectDB()
