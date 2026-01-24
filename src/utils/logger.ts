@@ -75,7 +75,7 @@ export const logger = winston.createLogger({
       : winston.format.uncolorize(),
     customFormat
   ),
-  defaultMeta: { service: "minest-api" },
+  defaultMeta: { service: "plant-disease-api" },
   transports: [
     new winston.transports.Console(),
 
