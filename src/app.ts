@@ -1,4 +1,9 @@
-import 'tsconfig-paths/register';
+
+// for production deployment on vercel
+import "module-alias/register";
+
+// for development environment variable support
+// import 'tsconfig-paths/register';
 
 import express, { Express } from 'express';
 import cors from "cors";

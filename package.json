@@ -5,18 +5,19 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "node dist/app.js",
-    "dev": "nodemon src/app.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/app.ts",
     "build": "tsc",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "eslint --ext .ts src/ --fix"
   },
+  "_moduleAliases": {
+    "@": "dist"
+  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.53.1",
     "@typescript-eslint/parser": "^8.53.1",
-    "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
-    "cookieparser": "^0.1.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
@@ -25,6 +26,7 @@
     "joi": "^18.0.2",
     "joi-extract-type": "^15.0.8",
     "jsonwebtoken": "^9.0.3",
+    "module-alias": "^2.2.3",
     "mongoose": "^9.1.5",
     "nanoid": "^5.1.6",
     "nodemon": "^3.1.11",
