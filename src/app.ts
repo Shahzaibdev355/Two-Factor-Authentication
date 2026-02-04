@@ -1,6 +1,6 @@
 
 // for production deployment on vercel
-import "module-alias/register";
+// import "module-alias/register";
 
 // for development environment variable support
 // import 'tsconfig-paths/register';
