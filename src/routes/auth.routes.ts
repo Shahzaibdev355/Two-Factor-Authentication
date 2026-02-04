@@ -2,9 +2,9 @@ import express from "express";
 import config from "../config/index";
 
 import UserRepository from "../repositories/user.repository";
-import UserService from "@/services/auth.service";
-import UserController from "@/controller/auth.controller";
-import { authMiddleware } from "@/middlewares/auth.middleware";
+import UserService from "../services/auth.service";
+import UserController from "../controller/auth.controller";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = express.Router();
 

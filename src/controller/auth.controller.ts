@@ -1,7 +1,7 @@
-import { getCookieOptions } from "@/helpers/cookie.helper";
-import { IUserController, IUserRequestData, IUserService } from "@/interfaces/user.interface";
-import { IAuthenticateRequest } from "@/types/auth.types";
-import { loginSchema, registerSchema, verfiy2FaValidator } from "@/validators/auth.validators";
+import { getCookieOptions } from "../helpers/cookie.helper";
+import { IUserController, IUserRequestData, IUserService } from "../interfaces/user.interface";
+import { IAuthenticateRequest } from "../types/auth.types";
+import { loginSchema, registerSchema, verfiy2FaValidator } from "../validators/auth.validators";
 import { RequestHandler } from "express";
 
 

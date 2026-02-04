@@ -1,20 +1,20 @@
-import { compareValues, hashValue } from "@/helpers/encryption.helper";
-import { ServiceSuccess } from "@/helpers/service.helper";
+import { compareValues, hashValue } from "../helpers/encryption.helper";
+import { ServiceSuccess } from "../helpers/service.helper";
 import {
   IUserRepository,
   IUserRequestData,
   IUserService,
-} from "@/interfaces/user.interface";
-import { TJwtPayload } from "@/types/jwt.type";
-import { AppError } from "@/utils/appError";
-import { signJWT } from "@/utils/jwt";
+} from "../interfaces/user.interface";
+import { TJwtPayload } from "../types/jwt.type";
+import { AppError } from "../utils/appError";
+import { signJWT } from "../utils/jwt";
 import config from "../config/index";
 import {
   generateDaysSeconds,
   generateMinutesSeconds,
-} from "@/helpers/date-time.helper";
-import { generateOTP, generateRecoveryCodes } from "@/helpers/2fa.helper";
-import { createQRCodeDataURL } from "@/helpers/qr.helper";
+} from "../helpers/date-time.helper";
+import { generateOTP, generateRecoveryCodes } from "../helpers/2fa.helper";
+import { createQRCodeDataURL } from "../helpers/qr.helper";
 
 export default class UserService implements IUserService {
   // Implementation of user service methods would go here
@@ -104,6 +104,7 @@ export default class UserService implements IUserService {
     const totp = generateOTP(user.email);
     const otpAuth = totp.toString();
 
+    // qr image generate
     const qrDataUrl = await createQRCodeDataURL(otpAuth);
 
     const secret = totp.secret.base32;

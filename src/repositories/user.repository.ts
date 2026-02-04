@@ -2,7 +2,7 @@ import {IUserRepository} from '../interfaces/user.interface';
 import {IUserSchema} from '../models/user.model';
 import { User } from '../models/user.model';
 
-import { TCreateUserInput } from '@/types/createUserInput.type'; 
+import { TCreateUserInput } from '../types/createUserInput.type'; 
 
 import {QueryFilter, UpdateQuery} from 'mongoose';
 

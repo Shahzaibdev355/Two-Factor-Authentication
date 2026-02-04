@@ -129,27 +129,7 @@ const UserSchema = new Schema<IUserSchema>(
 
 
 
-// UserSchema.pre(
-//     "save",
-//     async function (this: HydratedDocument<IUserSchema>) {
-//       if (!this.isModified("password")) {
-//         return;
-//       }
-  
-//       const salt = await bcrypt.genSalt(10);
-//       this.password = await bcrypt.hash(this.password, salt);
-//     }
-//   );
-  
 
-
-
-// Compare entered password with stored hash
-// UserSchema.methods.matchPassword = async function (
-//     enteredPassword: string
-// ): Promise<boolean> {
-//     return await bcrypt.compare(enteredPassword, this.password);
-// };
 
 export const User = mongoose.model<IUserSchema>("plant_user", UserSchema);
 

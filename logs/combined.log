@@ -1,0 +1,8 @@
+[2026-01-27 01:09:55] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-01-27 01:09:55] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-01-27 01:09:57] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-02.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-01-27 01:11:22] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}
+[2026-02-05 01:35:59] [[32minfo[39m] : 🚀 Server running in development mode on port 5000 | meta: {"service":"minest-api"}
+[2026-02-05 01:35:59] [[32minfo[39m] : 🔗 API Base URL: http://localhost:5000/api/v1 | meta: {"service":"minest-api"}
+[2026-02-05 01:36:02] [[32minfo[39m] : MongoDB Connected: ac-fjbjfim-shard-00-00.mbhxk7n.mongodb.net | meta: {"service":"minest-api"}
+[2026-02-05 01:49:19] [[31merror[39m] : MongoDB disconnected, trying to reconnect...: undefined | meta: {"service":"minest-api"}

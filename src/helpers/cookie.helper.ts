@@ -1,6 +1,6 @@
 import { CookieOptions } from "express";
 import { generateDaysMilliSeconds, generateMinutesMilliSeconds } from "./date-time.helper";
-import config from "@/config";
+import config from "../config/index";
 
 type TCookieParam = 
 {

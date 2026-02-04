@@ -58,9 +58,9 @@ app.get("/health", (req, res) => {
 // Error handling middleware
 app.use(errorMiddleware);
 
-
+ // Start Server
 try {
-    // Start Server
+   
     app.listen(PORT, () => {
       logger.info(`🚀 Server running in ${config.NODE_ENV} mode on port ${PORT}`);
       logger.info(

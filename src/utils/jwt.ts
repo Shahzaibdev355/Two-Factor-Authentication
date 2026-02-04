@@ -2,7 +2,7 @@
 import jwt from "jsonwebtoken";
 import config from "../config/index";
 import { IUserSchema } from "../models/user.model";
-import { TJwtPayload } from "@/types/jwt.type";
+import { TJwtPayload } from "../types/jwt.type";
 
 
 export const signJWT = (payload: TJwtPayload, secret:string, expiresIn: number) => jwt.sign(payload, secret, { expiresIn });
