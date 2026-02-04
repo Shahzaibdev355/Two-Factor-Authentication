@@ -62,14 +62,6 @@ if (!isProduction) {
 }
 
 
-
-
-
-
-
-
-
-
 export const logger = winston.createLogger({
   level: config.LOG_LEVEL || "info",
   format: combine(
@@ -84,6 +76,10 @@ export const logger = winston.createLogger({
   transports,
   exceptionHandlers,
 });
+
+
+
+
 
 
 // export const logger = winston.createLogger({
