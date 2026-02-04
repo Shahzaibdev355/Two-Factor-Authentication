@@ -65,6 +65,11 @@ if (!isProduction) {
 
 
 
+
+
+
+
+
 export const logger = winston.createLogger({
   level: config.LOG_LEVEL || "info",
   format: combine(
@@ -76,22 +81,38 @@ export const logger = winston.createLogger({
     customFormat
   ),
   defaultMeta: { service: "plant-disease-api" },
-  transports: [
-    new winston.transports.Console(),
-
-    new winston.transports.File({
-      filename: "logs/error.log",
-      level: "error",
-      maxsize: 10 * 1024 * 1024, // 10MB
-      maxFiles: 5,
-    }),
-    new winston.transports.File({
-      filename: "logs/combined.log",
-      maxsize: 10 * 1024 * 1024, // 10MB
-      maxFiles: 5,
-    }),
-  ],
-  exceptionHandlers: [
-    new winston.transports.File({ filename: "logs/exceptions.log" }),
-  ],
+  transports,
+  exceptionHandlers,
 });
+
+
+// export const logger = winston.createLogger({
+//   level: config.LOG_LEVEL || "info",
+//   format: combine(
+//     errors({ stack: true }),
+//     timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+//     config.NODE_ENV === "development"
+//       ? colorize()
+//       : winston.format.uncolorize(),
+//     customFormat
+//   ),
+//   defaultMeta: { service: "plant-disease-api" },
+//   transports: [
+//     new winston.transports.Console(),
+
+//     new winston.transports.File({
+//       filename: "logs/error.log",
+//       level: "error",
+//       maxsize: 10 * 1024 * 1024, // 10MB
+//       maxFiles: 5,
+//     }),
+//     new winston.transports.File({
+//       filename: "logs/combined.log",
+//       maxsize: 10 * 1024 * 1024, // 10MB
+//       maxFiles: 5,
+//     }),
+//   ],
+//   exceptionHandlers: [
+//     new winston.transports.File({ filename: "logs/exceptions.log" }),
+//   ],
+// });
