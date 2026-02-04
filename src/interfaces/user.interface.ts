@@ -3,9 +3,9 @@ import { RequestHandler } from 'express';
 import {IUserSchema} from '../models/user.model';
 
 import {QueryFilter, UpdateQuery, UpdateWriteOpResult} from 'mongoose';
-import { TServiceSuccess } from '@/types/service.type';
+import { TServiceSuccess } from '../types/service.type';
 
-import { TCreateUserInput } from '@/types/createUserInput.type'; 
+import { TCreateUserInput } from '../types/createUserInput.type'; 
 
 // import Joi from "joi";
 

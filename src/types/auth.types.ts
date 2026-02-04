@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-import { IUserSchema } from "@/models/user.model";
+import { IUserSchema } from "../models/user.model";
 import { Request } from "express";
 
 export interface RegisterUserInput {

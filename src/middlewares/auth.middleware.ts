@@ -1,9 +1,9 @@
-import config from "@/config"
-import { IUserRepository } from "@/interfaces/user.interface"
-import { IAuthenticateRequest } from "@/types/auth.types"
-import { TJwtPayload } from "@/types/jwt.type"
-import { AppError } from "@/utils/appError"
-import { verifyJWT } from "@/utils/jwt"
+import config from "../config"
+import { IUserRepository } from "../interfaces/user.interface"
+import { IAuthenticateRequest } from "../types/auth.types"
+import { TJwtPayload } from "../types/jwt.type"
+import { AppError } from "../utils/appError"
+import { verifyJWT } from "../utils/jwt"
 import { RequestHandler } from "express"
 
 
