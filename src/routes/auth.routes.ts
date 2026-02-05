@@ -17,46 +17,45 @@ const userService = new UserService(userRepository);
 //controller
 const userController = new UserController(userService);
 
-
-
 // Public routes
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 
-
 // Protected routes
-router.post("/activate-2fa",
-    authMiddleware({
-        stage: ['password'],
-        repositories: { userRepository }
-    }),
-    userController.activate2FA);
-
-
-router.post("/verify-2fa",
-    authMiddleware({
-        stage: ['password'],
-        repositories: { userRepository }
-    }),
-    userController.verify2Fa);
-
-
-router.get("/userInfo",
-    authMiddleware({
-        stage: ['password', '2fa'],
-        repositories: { userRepository }
-    }),
-    userController.userInfo
+router.post(
+  "/activate-2fa",
+  authMiddleware({
+    stage: ["password"],
+    repositories: { userRepository },
+  }),
+  userController.activate2FA
 );
 
-
-router.put("/logout",
-    authMiddleware({
-        stage: ['password', '2fa'],
-        repositories: { userRepository }
-    }),
-    userController.logOut
+router.post(
+  "/verify-2fa",
+  authMiddleware({
+    stage: ["password"],
+    repositories: { userRepository },
+  }),
+  userController.verify2Fa
 );
 
+router.get(
+  "/userInfo",
+  authMiddleware({
+    stage: ["password", "2fa"],
+    repositories: { userRepository },
+  }),
+  userController.userInfo
+);
+
+router.put(
+  "/logout",
+  authMiddleware({
+    stage: ["password", "2fa"],
+    repositories: { userRepository },
+  }),
+  userController.logOut
+);
 
 export default router;
