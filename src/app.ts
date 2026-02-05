@@ -23,7 +23,10 @@ console.log("🚀 App starting...");
 
 const app: Express = express();
 const PORT = config.PORT || 8000;
-const allowedOrigins = ["http://localhost:8080", "https://plant-health-hub.vercel.app"];
+const allowedOrigins = [
+    "http://localhost:8080", 
+    "https://plant-health-hub.vercel.app",
+];
 
 // database connection
 connectDB()
@@ -35,6 +38,7 @@ app.use(
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
         allowedHeaders: ["Content-Type", "Authorization"],
+        optionsSuccessStatus: 200 // For legacy browser support
     })
 );
 

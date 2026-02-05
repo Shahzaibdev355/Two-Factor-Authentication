@@ -18,7 +18,20 @@ type TAuthMiddleWareParam = {
 export const authMiddleware = (params: TAuthMiddleWareParam): RequestHandler => async (_req, res, next) => {
     try {
         const req = _req as IAuthenticateRequest
-        const { accessToken } = req.cookies
+        
+        // Try to get token from cookies first, then from Authorization header
+        let accessToken = req.cookies?.accessToken
+        
+        if (!accessToken) {
+            const authHeader = req.headers.authorization
+            if (authHeader && authHeader.startsWith('Bearer ')) {
+                accessToken = authHeader.substring(7)
+            }
+        }
+
+        console.log('Auth middleware - Token found:', !!accessToken)
+        console.log('Auth middleware - Cookies:', Object.keys(req.cookies || {}))
+        console.log('Auth middleware - Auth header:', !!req.headers.authorization)
 
         if (!accessToken) {
             return next(new AppError('Unauthorized', 401))
@@ -42,6 +55,7 @@ export const authMiddleware = (params: TAuthMiddleWareParam): RequestHandler => 
 
         next(new AppError('Unauthorized', 401))
     } catch (error) {
+        console.error('Auth middleware error:', error)
         next(new AppError('Unauthorized', 401))
     }
 }
