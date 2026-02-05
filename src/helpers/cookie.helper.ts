@@ -38,11 +38,6 @@ export const getCookieOptions = (param: TCookieParam) =>{
 
     }
 
-    if (config.NODE_ENV === 'production') {
-        cookieOptions.secure = true;
-        cookieOptions.sameSite = 'none';
-    }
-
     return cookieOptions; 
 }
 

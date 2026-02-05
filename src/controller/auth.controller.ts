@@ -47,8 +47,21 @@ export default class UserController implements IUserController {
             const response = await this.userService.login(value);
 
             const cookieOptions = getCookieOptions({purpose: 'auth', type: 'minute', value: 5}) 
+            
+            // Debug logging
+            console.log('Setting cookie with options:', cookieOptions);
+            console.log('Request origin:', req.headers.origin);
+            
             res.cookie('accessToken', response.data.accesstoken, cookieOptions);
-            res.status(200).json(response);
+            
+            // Also return token in response for frontend to use as fallback
+            res.status(200).json({
+                ...response,
+                data: {
+                    ...response.data,
+                    token: response.data.accesstoken // Add token to response body
+                }
+            });
 
            
         } catch (error) {

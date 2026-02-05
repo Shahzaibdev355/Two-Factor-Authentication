@@ -25,7 +25,9 @@ const app: Express = express();
 const PORT = config.PORT || 8000;
 const allowedOrigins = [
     "http://localhost:8080", 
+    "http://localhost:3000",
     "https://plant-health-hub.vercel.app",
+    "https://two-factor-authentication-two.vercel.app"
 ];
 
 // database connection
