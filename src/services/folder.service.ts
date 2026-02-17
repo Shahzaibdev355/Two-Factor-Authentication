@@ -52,21 +52,7 @@ export default class FolderService implements IFolderService {
         };
     }
 
-    // async delete(
-    //     userId: Types.ObjectId,
-    //     folderId: Types.ObjectId
-    // ): Promise<TServiceSuccess<null>> {
-    //     await this.folderRepository.findOneAndDelete({
-    //         _id: folderId,
-    //         userId,
-    //     });
-
-    //     return {
-    //         success: true,
-    //         message: "Folder deleted successfully",
-    //         data: null,
-    //     };
-    // }
+   
 
 
     async delete(

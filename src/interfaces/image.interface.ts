@@ -17,6 +17,10 @@ export interface IImageService {
         file: any
     ): Promise<IImage>;
 
+    getAllImages(
+        userId: Types.ObjectId
+    ): Promise<IImage[]>;  
+
     deleteImage(
         imageId: string,
         userId: Types.ObjectId
@@ -35,6 +39,10 @@ export interface IImageRepository {
         folderId: Types.ObjectId,
         userId: Types.ObjectId
     ): Promise<IImage[]>;
+
+    getAllImages(
+        userId: Types.ObjectId
+    ): Promise<IImage[]>;  
 
     deleteMany(filter: any): Promise<any>;
 }

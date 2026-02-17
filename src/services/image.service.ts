@@ -1,10 +1,11 @@
 
 
 
-import { IImageRepository, IImageService } from "../interfaces/image.interface";
+import { IImage, IImageRepository, IImageService } from "../interfaces/image.interface";
 
 import cloudinary from "../config/cloudinary";
 import { Types } from "mongoose";
+import { TServiceSuccess } from "@/types/service.type";
 
 class ImageService implements IImageService {
     constructor(private imageRepository: IImageRepository) { }
@@ -21,6 +22,15 @@ class ImageService implements IImageService {
             publicId: file.filename,
         });
     }
+
+
+    async getAllImages(
+        userId: Types.ObjectId
+    ): Promise<IImage[]> {
+
+        return this.imageRepository.getAllImages(userId);
+    }
+
 
     async deleteImage(imageId: string, userId: Types.ObjectId) {
         const image = await this.imageRepository.findById(imageId);
