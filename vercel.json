@@ -12,7 +12,7 @@
       "dest": "src/app.ts"
     }
   ],
-  "cron": [
+  "crons": [
     {
       "path": "/api/v1/cron/keep-alive",
       "schedule": "*/5 * * * *"
