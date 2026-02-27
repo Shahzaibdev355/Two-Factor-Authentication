@@ -20,6 +20,8 @@ interface Config {
     
     JWT_SECRET: string;
     JWT_REFRESH_SECRET: string;
+
+    HF_BACKEND_URL: string;
 }
 
 
@@ -40,6 +42,8 @@ const config: Config = {
 
     JWT_SECRET: process.env.JWT_SECRET || "your_fallback_secret_that_should_be_changed",
     JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || "your_fallback_refresh_secret",
+
+    HF_BACKEND_URL: process.env.HF_BACKEND_URL || "http://localhost:8000"
 }
 
 export default config;
